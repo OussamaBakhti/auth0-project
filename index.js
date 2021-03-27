@@ -13,7 +13,7 @@ server.listen(5000);
 
 const appSession = {
   secret: "process.env.SESSION_SECRET",
-  cookie: {},
+  cookie: { sameSite: false},
   resave: false,
   saveUninitialized: true
 };
