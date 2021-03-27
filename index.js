@@ -8,6 +8,7 @@ const app = express();
 const server = require('http').createServer(app);
 
 const usersRouter = require('./api/routes/users');
+const indexRouter = require('./api/routes/index');
 
 server.listen(5000);
 
@@ -60,6 +61,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/users', usersRouter);
+app.use('/', indexRouter);
 
 
 app.use((req, res, next) => {
