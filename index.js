@@ -35,7 +35,7 @@ const strategy = new Auth0Strategy({
      domain: "dev-acdfc6cd.eu.auth0.com",
      clientID: "RR1OUdSl6qo2AsZjC7vOIasbVWOSfPKv",
      clientSecret: "YBi_id8JoMXL7cN5yO1e5G1V8TnL3LHlet_eaAdtkaPSI7PAQ2q2U3QG26oOAfvF",
-     callbackURL: "http://localhost:5000/api/users/callback",
+     callbackURL: "http://ttsdev.eurekaa.org/api/users/callback",
      state: true
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
