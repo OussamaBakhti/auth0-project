@@ -19,7 +19,7 @@ const appSession = {
 };
 
 if (app.get('env') === 'production') {
-  sess.cookie.secure = true;
+  appSession.cookie.secure = true;
 }
 app.use(session(appSession));
 app.use(cors());
