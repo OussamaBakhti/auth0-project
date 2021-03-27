@@ -15,7 +15,7 @@ router.get('/callback', function (req, res, next) {
         if (err) { return next(err); }
         if (!user) {
           const obj = {err, user, info};
-          return res.render(obj);
+          return res.send(obj);
         }
         req.logIn(user, function (err) {
           if (err) { return next(err); }
