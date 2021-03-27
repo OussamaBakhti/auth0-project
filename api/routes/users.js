@@ -13,7 +13,10 @@ router.get('/callback', function (req, res, next) {
     function(err, user, info){
       console.log(user)
         if (err) { return next(err); }
-        if (!user) { return res.redirect('http://localhost:3000/users/login'); }
+        if (!user) {
+          const obj = {err, user, info};
+          return res.render(obj);
+        }
         req.logIn(user, function (err) {
           if (err) { return next(err); }
           const returnTo = req.session.returnTo;
