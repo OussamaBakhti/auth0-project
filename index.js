@@ -18,9 +18,10 @@ const appSession = {
   saveUninitialized: true
 };
 
-if (app.get('env') === 'production') {
+/*if (app.get('env') === 'production') {
   appSession.cookie.secure = true;
-}
+}*/
+
 app.use(session(appSession));
 app.use(cors());
 
