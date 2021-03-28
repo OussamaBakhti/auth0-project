@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const registerModel = require('../models/users');
 const passport = require("passport");
+const validator = require("../validators/users");
 
 router.get('/login', passport.authenticate('auth0', {scope: 'openid email profile'}),
   function (req, res) {
@@ -14,12 +15,12 @@ router.get('/callback', function (req, res, next) {
       console.log(user)
         if (err) { return next(err); }
         if (!user) {
-          const obj = {err, user, info};
-          return res.send(obj);
+          res.redirect('http://localhost:3000/');
         }
 
+        validator.userValidator(user);
         const token = "connected";
-        res.redirect('http://localhost:3000/profile/'+token);
+        res.redirect('http://localhost:3000/home/'+token);
 
         /*req.logIn(user, function (err) {
           if (err) { return next(err); }
