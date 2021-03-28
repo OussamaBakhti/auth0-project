@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const registerModel = require('../models/users');
 const passport = require("passport");
 
 router.get('/login', passport.authenticate('auth0', {scope: 'openid email profile'}),
@@ -17,13 +17,18 @@ router.get('/callback', function (req, res, next) {
           const obj = {err, user, info};
           return res.send(obj);
         }
-        req.logIn(user, function (err) {
+
+        const token = "connected";
+        res.redirect('http://localhost:3000/profile/'+token);
+
+        /*req.logIn(user, function (err) {
           if (err) { return next(err); }
+
           const returnTo = req.session.returnTo;
           delete req.session.returnTo;
           const token = "connected";
           res.redirect('http://localhost:3000/profile/'+token);
-        });
+        });*/
       })(req, res, next);
     });
 
