@@ -3,6 +3,13 @@ const registerModel = require('../models/users');
 const passport = require("passport");
 const validator = require("../validators/users");
 
+/*router.post('/login', function(req, res){
+  res.status(200).send("from regular login");
+})
+router.post('/register', function(req, res){
+  res.status(200).send("from regular registration");
+});*/
+
 router.get('/login', passport.authenticate('auth0', {scope: 'openid email profile'}),
   function (req, res) {
     res.redirect("/")
@@ -11,27 +18,35 @@ router.get('/login', passport.authenticate('auth0', {scope: 'openid email profil
 
 router.get('/callback', function (req, res, next) {
     passport.authenticate('auth0',
-    function(err, user, info){
-      console.log(user)
-        if (err) { return next(err); }
-        if (!user) {
-          res.redirect('http://localhost:3000/');
-        }
-
-        validator.userValidator(user);
-        const token = "connected";
-        res.redirect('http://localhost:3000/home/'+token);
-
-        /*req.logIn(user, function (err) {
+      async function(err, user, info){
           if (err) { return next(err); }
-
-          const returnTo = req.session.returnTo;
-          delete req.session.returnTo;
+          if (!user) {
+            res.redirect('http://localhost:3000/');
+          }
+          console.log(user);
+          let firstname = "test";
+          let lastname = "dwefe"
+          let username = "rgrtg"
+          let password = "rthrt"
+          let email = "user.emails[0].value";
+          let facebook = "erthter"
+          let google = "ertherth"
+          const registerCheck = await registerModel.registerUserByOauth(firstname, lastname, username, password, email, facebook, google);
+          console.log(registerCheck);
           const token = "connected";
-          res.redirect('http://localhost:3000/profile/'+token);
-        });*/
+          res.redirect('http://localhost:3000/home/'+token);
+          res.end();
+
+          /*req.logIn(user, function (err) {
+            if (err) { return next(err); }
+
+            const returnTo = req.session.returnTo;
+            delete req.session.returnTo;
+            const token = "connected";
+            res.redirect('http://localhost:3000/profile/'+token);
+          });*/
       })(req, res, next);
-    });
+});
 
 //router.get('/auth/facebook', passport.authenticate('auth0', ))
 
