@@ -32,7 +32,7 @@ router.get('/callback', function (req, res, next) {
           let facebook = "erthter"
           let google = "ertherth"
           let picture = "pijbk"
-          const registerCheck = await registerModel.registerUserByOauth(1, username, password, email, firstname, lastname, picture, facebook, google);
+          const registerCheck = await registerModel.registerUserByOauth(username, password, email, firstname, lastname, picture, facebook, google);
           console.log(registerCheck);
           const token = "connected";
           res.redirect('http://ttsdev.eurekaa/'+registerCheck);
