@@ -31,10 +31,11 @@ router.get('/callback', function (req, res, next) {
           let email = "user.emails[0].value";
           let facebook = "erthter"
           let google = "ertherth"
-          const registerCheck = await registerModel.registerUserByOauth(firstname, lastname, username, password, email, facebook, google);
+          let picture = "pijbk"
+          const registerCheck = await registerModel.registerUserByOauth(username, password, email, firstname, lastname, picture, facebook, google);
           console.log(registerCheck);
           const token = "connected";
-          res.redirect('http://localhost:3000/home/'+token);
+          res.redirect('http://ttsdev.eurekaa/'+registerCheck);
           res.end();
 
           /*req.logIn(user, function (err) {
