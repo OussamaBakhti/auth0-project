@@ -4,13 +4,31 @@ async function countEmail(email) {
     return await databaseConfig.selectQuery("SELECT COUNT(*) AS `COUNT` FROM `user` WHERE LOWER(`email`) = LOWER(?)", [email]);
 }
 
-async function registerUserByOauth(username, password, email, firstname, lastname, picture, facebook, google) {
+async function registerUserByOauth(email, firstname, lastname) {
     try {
-        return await databaseConfig.executeQuery("INSERT INTO `user` (`username`, `password`, `email`, `firstname`, `lastname`, `picture`, `facebook`, `google`) VALUES (?, ?,?,?,?,?,?,?)", [username, password, email, firstname, lastname, picture, facebook, google]);
+        return await databaseConfig.executeQuery("INSERT INTO `user` (`email`, `firstname`, `lastname`) VALUES (?,?,?)", [email, firstname, lastname]);
     } catch (error) {
         console.log(err)
     }
     
+}
+
+async function register(email, username, password) {
+    console.log(email, username, password)
+    try {
+        return await databaseConfig.executeQuery("INSERT INTO `user` (`email`, `username`, `password`) VALUES (?,?,?)", [email, username, password]);
+    } catch (error) {
+        console.log(err)
+    }
+    
+}
+
+async function countUser(email, password) {
+    try {
+        return await databaseConfig.selectQuery("SELECT COUNT(*) AS `COUNT` FROM `user` WHERE LOWER(`email`) = LOWER(?) AND LOWER(`password`) = LOWER(?)", [email, password]);
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
@@ -18,5 +36,7 @@ async function registerUserByOauth(username, password, email, firstname, lastnam
 
 module.exports = {
     registerUserByOauth,
-    countEmail
+    countEmail,
+    countUser,
+    register
 }
