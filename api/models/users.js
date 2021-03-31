@@ -14,7 +14,6 @@ async function registerUserByOauth(email, firstname, lastname) {
 }
 
 async function register(email, username, password) {
-    console.log(email, username, password)
     try {
         return await databaseConfig.executeQuery("INSERT INTO `user` (`email`, `username`, `password`) VALUES (?,?,?)", [email, username, password]);
     } catch (error) {
